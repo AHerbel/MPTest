@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="product"
+            type="com.aherbel.mptest.model.Product" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/bg_gradient"
+                android:scaleType="fitCenter"
+                app:glideImage="@{product.thumbnail}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivFreeShipping"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="@{safeUnbox(product.shipping.freeShipping ? View.VISIBLE : View.GONE)}"
+                app:layout_constraintBottom_toBottomOf="@+id/ivProductImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage"
+                app:srcCompat="@drawable/ic_delivery_truck"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{@string/product_price(product.price)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage"
+                tools:text="$ 28.399" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:textSize="14sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{@string/product_discount(product.getDiscount())}"
+                android:visibility="@{product.getDiscount() > 0 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
+                app:layout_constraintStart_toEndOf="@+id/tvPrice"
+                app:layout_constraintTop_toTopOf="@+id/tvPrice"
+                tools:text="%5 OFF" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="@{product.title}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice"
+                tools:text="Notebook Hp 15-da0057la l3 4gb 1tb Bluetooth Dvd Win 10 Some text to make this text gretaer than 2 lines for testing purposes" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
